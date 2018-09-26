@@ -1,3 +1,2 @@
 server:
-  port: $PORT
-#  port: 9999
+  port: ${PORT:9999}
