@@ -1,2 +1,3 @@
 server:
-  port: 9999
+  port: $PORT
+#  port: 9999
