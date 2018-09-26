@@ -1,1 +1,1 @@
-web: java -jar target/server-0.0.1-SNAPSHOT.jar
+web: java -jar target/server-0.0.1-SNAPSHOT.jar -Dspring.server.port=$PORT
