@@ -9,13 +9,19 @@ import {HttpClient} from "@angular/common/http";
 export class ExampleComponent implements OnInit {
 
   title = 'Demo app';
-  data = {};
+  data: Data = new Data();
+
 
   constructor(private http: HttpClient) {
-    http.get('resource').subscribe(data => this.data = data);
+    http.get('resource').subscribe(data => this.data = data as Data);
   }
 
   ngOnInit() {
   }
 
+}
+
+export class Data {
+  public id = 0;
+  public content = '';
 }
