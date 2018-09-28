@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {DebtsComponent} from './debts/debts.component';
-import {ExampleComponent} from './example/example.component';
+import {HomeComponent} from './home/home.component';
 import {environment} from '../environments/environment';
 
 import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from 'angular-6-social-login-v2';
@@ -15,6 +15,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {FormsModule} from '@angular/forms';
 import 'rxjs/add/operator/finally';
 import {LoginComponent} from './login/login.component';
+import {NavbarComponent} from './navbar/navbar.component';
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -48,8 +49,9 @@ export class XhrInterceptor implements HttpInterceptor {
   declarations: [
     AppComponent,
     DebtsComponent,
-    ExampleComponent,
-    LoginComponent
+    HomeComponent,
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

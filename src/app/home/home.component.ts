@@ -3,13 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../auth/auth.service";
 
 @Component({
-  selector: 'app-example',
-  templateUrl: './example.component.html',
-  styleUrls: ['./example.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class ExampleComponent {
+export class HomeComponent {
 
-  title = 'Demo app';
+  title = 'Menedżerze długów';
   data: Data = new Data();
 
 

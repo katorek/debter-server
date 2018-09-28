@@ -18,11 +18,7 @@ export class AuthService {
     } : {});
 
     this.http.get('user', {headers: headers}).subscribe(response => {
-      if (response['name']) {
-        this.authenticated = true;
-      } else {
-        this.authenticated = false;
-      }
+      this.authenticated = !!response['name'];
       return callback && callback();
     });
   }
