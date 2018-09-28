@@ -4,4 +4,4 @@ server:
 spring:
   security:
     user:
-      password: password
+      password: pass
