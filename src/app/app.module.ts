@@ -12,6 +12,7 @@ import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from "angul
 import {SigninComponent} from './signin/signin.component';
 import {BsDropdownModule, ModalModule, TooltipModule} from "ngx-bootstrap";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {CookieService} from "ngx-cookie-service";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -51,7 +52,8 @@ export function getAuthServiceConfigs() {
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

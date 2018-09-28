@@ -7,6 +7,11 @@ export const environment = {
   facebook_app_id: '532650907182673'
 };
 
+/*  facebook_app_id
+  Heroku 532650907182673
+  localhost 2165516750160183
+*/
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

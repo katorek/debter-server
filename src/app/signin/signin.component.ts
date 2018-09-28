@@ -30,7 +30,13 @@ export class SigninComponent implements OnInit {
   }
 
   public signOut(): void {
-    this.loginService.signOut();
+    this.loginService.signOut().subscribe(
+      (logged) => {
+        this.logged = logged;
+        if (!logged) {
+          this.user = null;
+        }
+      });
   }
 
   /*public socialSignIn(socialPlatform: string) {

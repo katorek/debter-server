@@ -1,8 +1,10 @@
 export const environment = {
   production: true,
-//  Heroku
-//   facebook_app_id: '532650907182673'
-// localhost
-  facebook_app_id: '2165516750160183'
+  facebook_app_id: '532650907182673'
 
 };
+
+/*  facebook_app_id
+  Heroku 532650907182673
+  localhost 2165516750160183
+*/
