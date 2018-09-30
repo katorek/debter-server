@@ -8,6 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class AuthService {
 
   authenticated = false;
+  loggedUser: string;
 
   constructor(private http: HttpClient) {
   }
@@ -18,8 +19,19 @@ export class AuthService {
     } : {});
 
     this.http.get('user', {headers: headers}).subscribe(response => {
-      this.authenticated = !!response['name'];
+      var a = 1;
+      if (response['name']) {
+        this.loggedUser = response['name'];
+        this.authenticated = true;
+      } else {
+        this.authenticated = false;
+      }
+
       return callback && callback();
     });
+  }
+
+  getLoggedUser() {
+    return this.loggedUser;
   }
 }

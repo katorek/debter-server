@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 
 @RestController
-public class MyController {
+public class LoginController {
 
   @GetMapping("/resource")
   @ResponseBody

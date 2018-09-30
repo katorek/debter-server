@@ -8,12 +8,11 @@ import {DebtsComponent} from './debts/debts.component';
 import {HomeComponent} from './home/home.component';
 import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {CookieService} from 'ngx-cookie-service';
 import {FormsModule} from '@angular/forms';
 import 'rxjs/add/operator/finally';
 import {LoginComponent} from './login/login.component';
 import {NavbarComponent} from './navbar/navbar.component';
-
+import {jqxGridComponent} from "jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -32,7 +31,8 @@ export class XhrInterceptor implements HttpInterceptor {
     DebtsComponent,
     HomeComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    jqxGridComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,6 @@ export class XhrInterceptor implements HttpInterceptor {
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true},
-    CookieService
   ],
   bootstrap: [AppComponent]
 })

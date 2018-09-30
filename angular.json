@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              //              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/jqwidgets-scripts/jqwidgets/styles/jqx.base.css",
               "src/styles.css"
             ],
             "scripts": []

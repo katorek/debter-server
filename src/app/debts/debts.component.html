@@ -1,8 +1,44 @@
-<div style="text-align:center" class="container">
-  <h1>
-    Debts
-  </h1>
-  <div>
-    <button [disabled]="true">Show me my debts</button>
+<div class="container">
+  <div [hidden]="authenticated()">
+    <p>Musisz być zalogowanym aby widzieć / dodawać długi</p>
+  </div>
+
+  <div *ngIf="showError" [class]="{fade:doFade}" class="alert alert-danger"><strong>Error:</strong> {{errorMessage}}
+  </div>
+  <div [hidden]="!authenticated()" class="row">
+
+    <div class="col-xs-6 tabela">
+      <h3>Tabela długów</h3>
+      <button (click)="optimizeDebts()">Zoptymalizuj długi</button>
+      <jqxGrid #debtGrid
+               [source]="dataAdapter" [columns]="columns" [filterable]="true"
+               [columnsresize]="true" [sortable]="true">
+      </jqxGrid>
+    </div>
+    <div class="col-xs-6 formularz">
+      <form (ngSubmit)="onSubmit()" #debtForm="ngForm">
+
+        <div class="form-group">
+          <label for="debtor">Dłużnik <input type="text" class="form-control" id="debtor" required
+                                             [(ngModel)]="model.debtor" name="name">
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="creditor">Kredytor
+            <input type="text" class="form-control" id="creditor" required [(ngModel)]="model.creditor" name="name">
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="amount">Ilość (zł)
+            <input type="number" class="form-control" id="amount" required [(ngModel)]="model.amount" name="name">
+          </label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Dodaj</button>
+          <button type="reset" class="btn" style="" (click)="newDebt(); debtForm.reset()">Wyczyść</button>
+        </div>
+      </form>
+
+    </div>
   </div>
 </div>
