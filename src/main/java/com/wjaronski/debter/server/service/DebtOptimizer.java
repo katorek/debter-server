@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Created by Wojciech Jaronski
+ */
+
 @Slf4j
 @Service
 public class DebtOptimizer {

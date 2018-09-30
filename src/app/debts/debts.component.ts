@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {AuthService} from "../auth/auth.service";
+import {AuthenticationService} from "../_services/authentication.service";
 import {HttpClient} from "@angular/common/http";
-import {Debt} from "./debt";
+import {Debt} from "../_models/debt";
 import {jqxGridComponent} from "jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid";
 
 @Component({
@@ -28,7 +28,7 @@ export class DebtsComponent implements OnInit, AfterViewInit {
   // START
   dataAdapter: any = new jqx.dataAdapter(this.source);
 
-  constructor(private auth: AuthService, private http: HttpClient) {
+  constructor(private auth: AuthenticationService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -81,18 +81,22 @@ export class DebtsComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-
-    this.http.post('/debts', this.model).subscribe(
-      (response) => {
-        this.source.localdata.push(this.model);
-        this.refresh(null);
-        this.newDebt();
-      }, (err) => {
-        console.log(err);
-        this.newDebt();
-        this.handleError('Nie udało się dodać długu. Po więcej informacji sprawdź konsolę', err, 2500);
-      }
-    )
+    if (this.model.creditor == this.model.debtor) {
+      this.handleError('Dłużnik nie może być równocześnie kredytobiorcą', '', 2500);
+    }
+    else {
+      this.http.post('/debts', this.model).subscribe(
+        (response) => {
+          this.source.localdata.push(this.model);
+          this.refresh(null);
+          this.newDebt();
+        }, (err) => {
+          console.log(err);
+          this.newDebt();
+          this.handleError('Nie udało się dodać długu. Po więcej informacji sprawdź konsolę', err, 2500);
+        }
+      )
+    }
   }
 
   handleError(errMsg, error, timeout) {

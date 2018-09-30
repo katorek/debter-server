@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 /**
  * Created by Wojciech Jaronski
@@ -21,9 +23,12 @@ public class Debt {
   @Id
   @GeneratedValue
   private Long id;
+  @NotNull
   private String debtor;
+  @NotNull
   private String creditor;
-  @Column(columnDefinition = "Decimal(10,2)")
+  @Column(columnDefinition = "Decimal(10,2)", nullable = false)
+  @Positive
   private Double amount;
 
   @Transient

@@ -1,10 +1,11 @@
 package com.wjaronski.debter.server.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.wjaronski.debter.server.domain.User;
+import com.wjaronski.debter.server.exceptions.UserAlreadyExistsException;
+import com.wjaronski.debter.server.service.MyUserDetailsService;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,12 @@ import java.util.UUID;
 
 @RestController
 public class LoginController {
+
+  private final MyUserDetailsService userDetailsService;
+
+  public LoginController(MyUserDetailsService userDetailsService) {
+    this.userDetailsService = userDetailsService;
+  }
 
   @GetMapping("/resource")
   @ResponseBody
@@ -31,4 +38,9 @@ public class LoginController {
     return user;
   }
 
+
+  @PostMapping("/register")
+  public User registerUser(@RequestBody @Valid User user) throws UserAlreadyExistsException {
+    return userDetailsService.registerUser(user);
+  }
 }

@@ -17,8 +17,9 @@
                                 routerLink="/debts">Długi</a></li>
         <li class="nav-item"><a class="nav-link" [hidden]="authenticated()" routerLinkActive="active"
                                 routerLink="/login">Zaloguj</a></li>
-        <li class="nav-item"><a class="nav-link" [hidden]="!authenticated()" (click)="logout()" routerLink="/home">Wyloguj</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" [hidden]="!authenticated()" (click)="logout()"
+                                routerLink="/home">Wyloguj</a></li>
+        <!--<li class="nav-item"><a class="nav-link" [hidden]="authenticated()"></a></li>-->
       </ul>
     </div>
   </nav>

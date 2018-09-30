@@ -3,6 +3,8 @@ package com.wjaronski.debter.server.config;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,7 +12,7 @@ import java.net.URISyntaxException;
 @Configuration
 public class DatasourceConfig {
 
-  @Bean
+  //  @Bean
   public BasicDataSource dataSource() throws URISyntaxException {
     URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
@@ -25,5 +27,10 @@ public class DatasourceConfig {
     basicDataSource.setPassword(password);
 
     return basicDataSource;
+  }
+
+  @Bean
+  public PasswordEncoder encoder() {
+    return new BCryptPasswordEncoder(11);
   }
 }

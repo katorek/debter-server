@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 /**
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 public class DebtService {
   private final DebtRepository repository;
   private final DebtOptimizer debtOptimizer;
-  private AtomicBoolean optimizing = new AtomicBoolean(false);
 
   public DebtService(DebtRepository repository, DebtOptimizer debtOptimizer) {
     this.repository = repository;
@@ -28,17 +26,6 @@ public class DebtService {
   }
 
   public List<Debt> findAll() {
-    /*if(optimizing.get()){
-      int timeout = 500;//5sec
-      while (timeout-- > 0 && optimizing.get()){
-        try{
-          Thread.sleep(50);
-        }catch (InterruptedException e){
-          log.error("{}",e);
-        }
-      }
-    }
-    if(optimizing.get()) throw new OptimizingNotEnded();*/
     return repository.findAll();
   }
 
@@ -91,12 +78,7 @@ public class DebtService {
 
   @Transactional
   public List<Debt> optimizeDebts() {
-    this.optimizing.set(true);
-    List<Debt> output = debtOptimizer.optimize(findAll());
-    this.optimizing.set(false);
-    //start counting time
-    return output;
-    //end counting time
+    return debtOptimizer.optimize(findAll());
   }
 
 

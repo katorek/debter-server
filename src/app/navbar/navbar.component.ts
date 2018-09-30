@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AuthService} from "../auth/auth.service";
+import {AuthenticationService} from "../_services/authentication.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
@@ -12,7 +12,7 @@ export class NavbarComponent {
 
   navbarOpen = false;
 
-  constructor(private auth: AuthService, private http: HttpClient, private router: Router) {
+  constructor(private auth: AuthenticationService, private http: HttpClient, private router: Router) {
     this.auth.authenticate(undefined, undefined);
   }
 

@@ -2,12 +2,9 @@ server:
   port: ${PORT:9999}
 
 spring:
-  security:
-    user:
-      password: pass
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
 logging:
   level:

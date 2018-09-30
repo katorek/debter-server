@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../auth/auth.service";
+import {AuthenticationService} from "../_services/authentication.service";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent {
   data: Data = new Data();
 
 
-  constructor(private auth: AuthService, private http: HttpClient) {
+  constructor(private auth: AuthenticationService, private http: HttpClient) {
     http.get('resource').subscribe(data => this.data = data as Data);
   }
 

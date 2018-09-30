@@ -3,17 +3,20 @@
 </div>
 <form role="form" (submit)="login()">
   <div class="form-group">
-    <label for="username">Użytkownik:</label> <input type="text"
-                                                     class="form-control" id="username" name="username"
-                                                     [(ngModel)]="credentials.username"/>
+    <label for="username">Użytkownik:</label>
+    <input type="text"
+           class="form-control" id="username" name="username"
+           [(ngModel)]="credentials.username"/>
   </div>
   <div class="form-group">
-    <label for="password">Hasło:</label> <input type="password"
-                                                class="form-control" id="password" name="password"
-                                                [(ngModel)]="credentials.password"/>
+    <label for="password">Hasło:</label>
+    <input type="password"
+           class="form-control" id="password" name="password"
+           [(ngModel)]="credentials.password"/>
   </div>
   <div>
-    <p>W celu utworzenia nowego konta napisz do Katora</p>
+    <button type="submit" class="btn btn-primary">Zaloguj</button>
+    <button type="button" class="btn btn-secondary" routerLink="/register">Zarejestruj</button>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<!-- TODO -->
