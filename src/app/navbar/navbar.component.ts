@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from "../_services/authentication.service";
-import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,7 +11,8 @@ export class NavbarComponent {
 
   navbarOpen = false;
 
-  constructor(private auth: AuthenticationService, private http: HttpClient, private router: Router) {
+  constructor(private auth: AuthenticationService,
+              private router: Router) {
     this.auth.authenticate(undefined, undefined);
   }
 
@@ -21,7 +21,7 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.http.post('logout', {}).finally(() => {
+    this.auth.logout().finally(() => {
       this.auth.authenticated = false;
       this.router.navigateByUrl('/login');
     }).subscribe();
