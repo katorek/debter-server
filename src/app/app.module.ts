@@ -14,6 +14,7 @@ import {LoginComponent} from './login/login.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {jqxGridComponent} from "jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid";
 import {RegisterComponent} from './register/register.component';
+import {PositiveNumberDirective} from './_directives/positive-number.directive';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -34,7 +35,8 @@ export class XhrInterceptor implements HttpInterceptor {
     LoginComponent,
     NavbarComponent,
     jqxGridComponent,
-    RegisterComponent
+    RegisterComponent,
+    PositiveNumberDirective
   ],
   imports: [
     BrowserModule,

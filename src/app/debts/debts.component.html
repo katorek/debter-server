@@ -15,30 +15,52 @@
                [columnsresize]="true" [sortable]="true">
       </jqxGrid>
     </div>
+
+
     <div class="col-xs-6 formularz">
-      <form (ngSubmit)="onSubmit()" #debtForm="ngForm">
+      <form [formGroup]="debtForm" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
-          <label for="debtor">Dłużnik <input type="text" class="form-control" id="debtor" required
-                                             [(ngModel)]="model.debtor" name="name">
-          </label>
+          <label for="debtor">Dłużnik</label>
+          <input id="debtor" type="text" class="form-control" formControlName="debtor" required
+                 [ngClass]="{ 'is-invalid': !f.debtor.pristine && (f.debtor.errors || !!debtForm.errors?.sameCreditorAndDebtor)}">
+          <div *ngIf="!f.debtor.pristine && (!!f.debtor.errors || !!debtForm.errors?.sameCreditorAndDebtor)"
+               class="invalid-feedback">
+            <div *ngIf="!!f.debtor.errors?.required">Dłużnik jest wymagany</div>
+            <div *ngIf="!!debtForm.errors?.sameCreditorAndDebtor">Dłużnik i kredytobiorca muszą być różni</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="creditor">Kredytor</label>
+          <input id="creditor" type="text" class="form-control" formControlName="creditor" required
+                 [ngClass]="{ 'is-invalid': !f.creditor.pristine && (f.creditor.errors || !!debtForm.errors?.sameCreditorAndDebtor)}">
+          <div *ngIf="!f.creditor.pristine && (!!f.creditor.errors || !!debtForm.errors?.sameCreditorAndDebtor)"
+               class="invalid-feedback">
+            <div *ngIf="!!f.creditor.errors?.required">Kredytobiorca jest wymagany</div>
+            <div *ngIf="!!debtForm.errors?.sameCreditorAndDebtor">Dłużnik i kredytobiorca muszą być różni</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Ilość (zł)</label>
+          <input id="amount" type="number" step="0.01"
+                 class="form-control" formControlName="amount" required
+                 [ngClass]="{ 'is-invalid': !f.amount.pristine && f.amount.errors}">
+          <div *ngIf="!f.amount.pristine && !!f.amount.errors" class="invalid-feedback">
+            <div *ngIf="!!f.amount.errors.required">Wartość długu jest wymagana</div>
+            <div *ngIf="!!f.amount.errors.nonPositive">Wartość długu musi być dodatnia</div>
+            <div *ngIf="!f.amount.errors.nonPositive">Wartość długu musi być dodatnia</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!debtForm.valid">Dodaj</button>
         </div>
         <div class="form-group">
-          <label for="creditor">Kredytor
-            <input type="text" class="form-control" id="creditor" required [(ngModel)]="model.creditor" name="name">
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="amount">Ilość (zł)
-            <input type="number" class="form-control" id="amount" required [(ngModel)]="model.amount" name="name">
-          </label>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success">Dodaj</button>
-          <button type="reset" class="btn" style="" (click)="newDebt(); debtForm.reset()">Wyczyść</button>
+          <button type="reset" class="btn btn-secondary" (click)="newDebt(); debtForm.reset()">Wyczyść</button>
         </div>
       </form>
-
     </div>
   </div>
 </div>

@@ -1,17 +1,23 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../_services/authentication.service";
 import {HttpClient} from "@angular/common/http";
 import {Debt} from "../_models/debt";
 import {jqxGridComponent} from "jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid";
+import {FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {DebtService} from "../_services/debt.service";
+import {positiveNumberValidator} from "../_directives/positive-number.directive";
+import {first} from "rxjs/operators";
+import {AlertService} from "../_services/alert.service";
 
 @Component({
   selector: 'app-debts',
   templateUrl: './debts.component.html',
   styleUrls: ['./debts.component.css']
 })
-export class DebtsComponent implements OnInit, AfterViewInit {
+export class DebtsComponent implements OnInit {
   @ViewChild('debtGrid') debtGrid: jqxGridComponent;
   model = new Debt();
+  debtForm: FormGroup;
   errorMessage = '';
   doFade = false;
   showError = false;
@@ -28,28 +34,30 @@ export class DebtsComponent implements OnInit, AfterViewInit {
   // START
   dataAdapter: any = new jqx.dataAdapter(this.source);
 
-  constructor(private auth: AuthenticationService, private http: HttpClient) {
+  constructor(private auth: AuthenticationService,
+              private http: HttpClient,
+              private fb: FormBuilder,
+              private debtService: DebtService,
+              private alertService: AlertService) {
+  }
+
+  get f() {
+    return this.debtForm.controls;
+  }
+
+
+  newDebt() {
+    this.model = new Debt();
   }
 
   ngOnInit() {
     this.getUserDebts();
-  }
-
-  ngAfterViewInit(): void {
-    /*var localizationobj: jqwidgets.GridLocalizationobject = {};
-    localizationobj.pagergotopagestring = "Idź do";
-    localizationobj.pagershowrowsstring = "Zeige Zeile:";
-    localizationobj.pagerrangestring = " ?? ";
-    localizationobj.pagernextbuttonstring = " ?? ";
-    localizationobj.sortascendingstring = "Sortuj rosnąco";
-    localizationobj.sortdescendingstring = "Sortuj malejąco";
-    localizationobj.sortremovestring = "Wyczyść sortowanie";
-    this.debtGrid.autoheight(true);
-    this.debtGrid.localizestrings(localizationobj);*/
-  }
-
-  newDebt() {
-    this.model = new Debt();
+    this.debtForm = this.fb.group({
+        debtor: ['', Validators.required],
+        creditor: ['', Validators.required],
+        amount: ['', [Validators.required, positiveNumberValidator()]]
+      }, {validator: sameCreditorAndDebtor}
+    );
   }
 
   authenticated() {
@@ -62,18 +70,17 @@ export class DebtsComponent implements OnInit, AfterViewInit {
   }
 
   getUserDebts() {
-    const user = this.auth.getLoggedUser();
-    this.http.get<Array<Debt>>('/debts').subscribe(
+    this.debtService.getDebts().subscribe(
       (response) => {
         this.refresh(response)
       }, (err) => {
-        this.handleError('Error', err, 2000);
+        this.alertService.error(err);
       }
-    )
+    );
   }
 
   optimizeDebts() {
-    this.http.get('/debts/optimize').subscribe(
+    this.debtService.optimizeDebts().subscribe(
       (response) => {
         this.refresh(response);
       }
@@ -81,34 +88,31 @@ export class DebtsComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    if (this.model.creditor == this.model.debtor) {
-      this.handleError('Dłużnik nie może być równocześnie kredytobiorcą', '', 2500);
+    if (this.debtForm.invalid) {
+      return
     }
-    else {
-      this.http.post('/debts', this.model).subscribe(
-        (response) => {
-          this.source.localdata.push(this.model);
+
+    this.debtService.postDebt(this.debtForm.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success('Rejestracja udana', true);
+          this.source.localdata.push(this.debtForm.value);
           this.refresh(null);
-          this.newDebt();
-        }, (err) => {
-          console.log(err);
-          this.newDebt();
-          this.handleError('Nie udało się dodać długu. Po więcej informacji sprawdź konsolę', err, 2500);
+          this.debtForm.reset();
+        }, error => {
+          this.alertService.error(error);
+
         }
       )
-    }
+
   }
 
-  handleError(errMsg, error, timeout) {
-    console.log(error);
-    this.showError = false;
-    this.doFade = false;
-    this.showError = true;
-    this.errorMessage = errMsg;
-    setTimeout(() => {
-      this.doFade = true;
-    }, timeout);
-  }
-
-//  END
 }
+
+export const sameCreditorAndDebtor: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const creditor = control.get('creditor');
+  const debtor = control.get('debtor');
+  if (creditor.value === '' || debtor.value === '') return null;
+  return debtor && creditor && debtor.value === creditor.value ? {sameCreditorAndDebtor: true} : null;
+};
