@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 @Configuration
 public class DatasourceConfig {
 
-  @Bean
+  //  @Bean
   public BasicDataSource dataSource() throws URISyntaxException {
     URI dbUri = new URI(System.getenv("DATABASE_URL"));
 

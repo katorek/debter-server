@@ -75,6 +75,13 @@
       <artifactId>spring-data-rest-core</artifactId>
       <version>3.0.9.RELEASE</version>
     </dependency>
+    <!-- JWT -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>

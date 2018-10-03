@@ -13,7 +13,7 @@ export class NavbarComponent {
 
   constructor(private auth: AuthenticationService,
               private router: Router) {
-    this.auth.authenticate(undefined, undefined);
+    // this.auth.authenticate(undefined, undefined);
   }
 
   toggleNavbar() {
@@ -21,11 +21,15 @@ export class NavbarComponent {
   }
 
   logout() {
+    this.auth.logout();
+  }
+
+  /*logout() {
     this.auth.logout().finally(() => {
       this.auth.authenticated = false;
       this.router.navigateByUrl('/login');
     }).subscribe();
-  }
+  }*/
 
   authenticated() {
     return this.auth.authenticated;

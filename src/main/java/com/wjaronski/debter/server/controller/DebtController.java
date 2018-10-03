@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Wojciech Jaronski
  */
 @RestController
-@RequestMapping("/debts")
+@RequestMapping("/api/debts")
 public class DebtController {
 
   private final DebtService debtService;

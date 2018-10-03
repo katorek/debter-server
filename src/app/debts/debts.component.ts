@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../_services/authentication.service";
-import {HttpClient} from "@angular/common/http";
 import {Debt} from "../_models/debt";
 import {jqxGridComponent} from "jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid";
 import {FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
@@ -35,7 +34,6 @@ export class DebtsComponent implements OnInit {
   dataAdapter: any = new jqx.dataAdapter(this.source);
 
   constructor(private auth: AuthenticationService,
-              private http: HttpClient,
               private fb: FormBuilder,
               private debtService: DebtService,
               private alertService: AlertService) {

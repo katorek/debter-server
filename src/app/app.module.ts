@@ -15,6 +15,8 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {jqxGridComponent} from "jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid";
 import {RegisterComponent} from './register/register.component';
 import {PositiveNumberDirective} from './_directives/positive-number.directive';
+import {JwtInterceptor} from "./_helpers/jwt.interceptor";
+import {ErrorInterceptor} from "./_helpers/error.interceptor";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -50,7 +52,9 @@ export class XhrInterceptor implements HttpInterceptor {
     ReactiveFormsModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true},
+    // {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

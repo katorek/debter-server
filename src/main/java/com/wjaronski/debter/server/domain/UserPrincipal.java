@@ -9,11 +9,15 @@ import java.util.Collection;
  * Created by Wojciech Jaronski
  */
 
-public class MyUserPrincipal implements UserDetails {
+public class UserPrincipal implements UserDetails {
   private User user;
 
-  public MyUserPrincipal(User user) {
+  public UserPrincipal(User user) {
     this.user = user;
+  }
+
+  public Long getId() {
+    return user.getId();
   }
 
   @Override

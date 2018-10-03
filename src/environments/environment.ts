@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   facebook_app_id: '532650907182673',
-  apiUrl: ''
+  apiUrl: '/api'
 };
 
 /*  facebook_app_id

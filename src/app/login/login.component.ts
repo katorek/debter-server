@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
 import {AuthenticationService} from "../_services/authentication.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AlertService} from "../_services/alert.service";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -13,12 +13,11 @@ import {AlertService} from "../_services/alert.service";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   credentials = {username: '', password: ''};
-  returnUrl = '/';
+  returnUrl = '/home';
   loading = false;
 
   constructor(private authenticationService: AuthenticationService,
               private alertService: AlertService,
-              private http: HttpClient,
               private router: Router,
               private fb: FormBuilder) {
   }
@@ -44,18 +43,20 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.credentials = {username: this.f.username.value, password: this.f.password.value};
 
-    this.login()
-
-    /*this.authenticationService.login(this.f.username.value, this.f.password.value)
+    // this.login()
+    debugger;
+    this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
+          debugger;
           this.router.navigate([this.returnUrl]);
         },
         error => {
+          debugger;
           this.alertService.error(error);
           this.loading = false;
-        });*/
+        });
 
   }
 
