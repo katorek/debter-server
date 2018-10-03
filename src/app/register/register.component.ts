@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {first} from "rxjs/operators";
-import {UserService} from "../_services/user.service";
-import {AlertService} from "../_services/alert.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {first} from 'rxjs/operators';
+import {UserService} from '../_services/user.service';
+import {AlertService} from '../_services/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.userForm.invalid) {
-      return
+      return;
     }
 
     this.userService.register(this.userForm.value)

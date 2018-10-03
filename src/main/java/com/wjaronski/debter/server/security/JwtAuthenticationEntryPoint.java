@@ -21,9 +21,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
   public void commence(HttpServletRequest request,
                        HttpServletResponse response,
                        AuthenticationException e) throws IOException, ServletException {
-    log.error("{}", request);
-    log.error("{}", response);
-    log.error("{}", e.getMessage());
+    log.warn("{}", e.getMessage());
     response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
       "Przepraszamy, nie jesteś autoryzowany do zarządzania zasobem.");
 

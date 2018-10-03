@@ -13,8 +13,8 @@ export class Debt {
   }*/
 
   toString(): string {
-    return "Dług {kto dłużny: '" + this.debtor +
-      "', komu dłużny: '" + this.creditor +
-      "', ile dłużny: " + this.amount + "}";
+    return 'Dług {kto dłużny: \'' + this.debtor +
+      '\', komu dłużny: \'' + this.creditor +
+      '\', ile dłużny: ' + this.amount + '}';
   }
 }

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {AuthenticationService} from "../_services/authentication.service";
+import {HttpClient} from '@angular/common/http';
+import {AuthenticationService} from '../_services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,7 @@ export class HomeComponent {
   }
 
   authenticated() {
-    return this.auth.authenticated;
+    return this.auth.isAuthenticated;
   }
 
 }

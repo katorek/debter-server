@@ -3,10 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 import {DebtsComponent} from './debts/debts.component';
 import {HomeComponent} from './home/home.component';
 // import {SigninComponent} from './signin/signin.component';
-import {LoginComponent} from "./login/login.component";
-import {RegisterComponent} from "./register/register.component";
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -15,9 +15,11 @@ export const routes: Routes = [
   {path: 'register', component: RegisterComponent}
 ];
 
-@NgModule({
+export const routing = RouterModule.forRoot(routes);
+
+/*@NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
-})
-export class AppRoutingModule {
-}
+})*/
+/*export class AppRoutingModule {
+}*/

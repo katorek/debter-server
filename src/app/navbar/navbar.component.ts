@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {AuthenticationService} from "../_services/authentication.service";
-import {Router} from "@angular/router";
+import {AuthenticationService} from '../_services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -32,7 +32,7 @@ export class NavbarComponent {
   }*/
 
   authenticated() {
-    return this.auth.authenticated;
+    return this.auth.isAuthenticated;
   }
 
 }
