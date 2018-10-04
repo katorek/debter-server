@@ -1,5 +1,6 @@
 # Debt Manager
-Project to manage debts between friends.
+Project to manage debts between friends.  
+## Technologies
 Frontpage written in Angular 6, server in Java using Spring Boot
 
 # Requirements
@@ -17,3 +18,7 @@ Frontpage written in Angular 6, server in Java using Spring Boot
 
 ### To build constantly Angular project
 `ng build --watch`
+
+## License
+
+MIT: http://rem.mit-license.org
