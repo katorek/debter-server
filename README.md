@@ -1,33 +1,19 @@
-#Requirements
-Java
-mvn
+# Debt Manager
+Project to manage debts between friends.
+Frontpage written in Angular 6, server in Java using Spring Boot
 
+# Requirements
+* Java 8
+* Maven
 
- https://spring.io/guides/tutorials/spring-security-and-angular-js/#_spring_and_angular_js_a_secure_single_page_application
-# Client
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Initial commands
+1. `mvn generate resources` - to download Node and all necessary packages
+2. `mvn clean install`
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Build whole project
+`mvn clean package`
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### To build constantly Angular project
+`ng build --watch`
